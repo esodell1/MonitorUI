@@ -1,25 +1,21 @@
 package edu.uw.tcss450.monitorui;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class DashboardActivity extends AppCompatActivity implements HrDbFragment.OnFragmentInteractionListener,
         Spo2DbFragment.OnFragmentInteractionListener {
 
-    NestedScrollView dbView;
+    View hrdb_fragment;
+    View spo2db_fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +33,22 @@ public class DashboardActivity extends AppCompatActivity implements HrDbFragment
             }
         });
 
+        hrdb_fragment = findViewById(R.id.hrdb);
+        hrdb_fragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), HRActivity.class));
+            }
+        });
+
+        spo2db_fragment = findViewById(R.id.spo2db);
+        spo2db_fragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "SpO2 clicked!", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
     @Override

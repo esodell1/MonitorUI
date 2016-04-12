@@ -26,6 +26,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.uw.tcss450.monitorui.DashboardActivity" />
         </activity>
+        <activity
+            android:name=".HRActivity"
+            android:label="@string/title_activity_hr"
+            android:parentActivityName=".DashboardActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uw.tcss450.monitorui.DashboardActivity" />
+        </activity>
     </application>
 
 </manifest>
