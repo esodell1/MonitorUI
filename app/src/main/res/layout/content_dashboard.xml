@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/dashboard_view"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="edu.uw.tcss450.monitorui.DashboardActivity"
+    tools:context=".activities.DashboardActivity"
     tools:showIn="@layout/activity_dashboard">
 
     <LinearLayout
@@ -14,13 +14,40 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/db_item_height"
+            android:layout_margin="@dimen/db_item_margin">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/db_item_margin"
+                android:layout_marginRight="@dimen/db_item_margin"
+                android:background="@color/colorAccent"
+                android:text="@string/button_start"
+                android:id="@+id/button_start" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/db_item_margin"
+                android:layout_marginLeft="@dimen/db_item_margin"
+                android:background="@color/colorAccent"
+                android:text="@string/button_stop"
+                android:id="@+id/button_stop" />
+        </LinearLayout>
+
         <fragment
             android:id="@+id/hrdb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/db_item_margin"
-            android:name="edu.uw.tcss450.monitorui.HrDbFragment"
-            class="edu.uw.tcss450.monitorui.HrDbFragment"
+            android:name="edu.uw.tcss450.monitorui.fragments.HrDbFragment"
+            class="edu.uw.tcss450.monitorui.fragments.HrDbFragment"
             tools:layout="@layout/fragment_hr_db" />
 
         <fragment
@@ -28,9 +55,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/db_item_margin"
-            android:name="edu.uw.tcss450.monitorui.Spo2DbFragment"
-            class="edu.uw.tcss450.monitorui.Spo2DbFragment"
+            android:name="edu.uw.tcss450.monitorui.fragments.Spo2DbFragment"
+            class="edu.uw.tcss450.monitorui.fragments.Spo2DbFragment"
             tools:layout="@layout/fragment_spo2_db" />
+
+
     </LinearLayout>
 
 

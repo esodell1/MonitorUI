@@ -1,4 +1,4 @@
-package edu.uw.tcss450.monitorui;
+package edu.uw.tcss450.monitorui.activities;
 
 
 import android.annotation.TargetApi;
@@ -22,6 +22,8 @@ import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 
 import java.util.List;
+
+import edu.uw.tcss450.monitorui.R;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

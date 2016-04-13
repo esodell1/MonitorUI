@@ -1,16 +1,15 @@
-package edu.uw.tcss450.monitorui;
+package edu.uw.tcss450.monitorui.fragments;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
+import edu.uw.tcss450.monitorui.R;
 
 
 /**

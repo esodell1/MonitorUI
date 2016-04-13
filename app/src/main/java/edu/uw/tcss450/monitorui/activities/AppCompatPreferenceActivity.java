@@ -1,4 +1,4 @@
-package edu.uw.tcss450.monitorui;
+package edu.uw.tcss450.monitorui.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

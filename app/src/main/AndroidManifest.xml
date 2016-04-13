@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.uw.tcss450.monitorui">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".DashboardActivity"
+            android:name=".activities.DashboardActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,21 +21,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".DashboardActivity">
+            android:parentActivityName=".activities.DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.uw.tcss450.monitorui.DashboardActivity" />
+                android:value=".activities.DashboardActivity" />
         </activity>
         <activity
-            android:name=".HRActivity"
+            android:name=".activities.HRActivity"
             android:label="@string/title_activity_hr"
-            android:parentActivityName=".DashboardActivity"
+            android:parentActivityName=".activities.DashboardActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.uw.tcss450.monitorui.DashboardActivity" />
+                android:value=".activities.DashboardActivity" />
         </activity>
     </application>
 

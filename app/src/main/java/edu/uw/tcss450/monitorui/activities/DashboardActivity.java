@@ -1,4 +1,4 @@
-package edu.uw.tcss450.monitorui;
+package edu.uw.tcss450.monitorui.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -7,15 +7,22 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import edu.uw.tcss450.monitorui.fragments.HrDbFragment;
+import edu.uw.tcss450.monitorui.R;
+import edu.uw.tcss450.monitorui.fragments.Spo2DbFragment;
+import edu.uw.tcss450.monitorui.network.NsdHelper;
+
 public class DashboardActivity extends AppCompatActivity implements HrDbFragment.OnFragmentInteractionListener,
         Spo2DbFragment.OnFragmentInteractionListener {
-
-    View hrdb_fragment;
-    View spo2db_fragment;
+    private static final String TAG = "MonitorUI";
+    private NsdHelper mNsdHelper;
+    private View hrdb_fragment;
+    private View spo2db_fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,5 +87,36 @@ public class DashboardActivity extends AppCompatActivity implements HrDbFragment
     @Override
     public void onHRUpdate(Uri uri) {
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        Log.d(TAG, "Starting.");
+        mNsdHelper = new NsdHelper(this);
+        mNsdHelper.initializeNsd();
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d(TAG, "Resuming.");
+        super.onResume();
+        if (mNsdHelper != null) {
+            mNsdHelper.discoverServices();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(TAG, "Pausing.");
+        if (mNsdHelper != null) {
+            mNsdHelper.stopDiscovery();
+        }
+        super.onPause();
     }
 }

@@ -1,4 +1,4 @@
-package edu.uw.tcss450.monitorui;
+package edu.uw.tcss450.monitorui.activities;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import edu.uw.tcss450.monitorui.R;
 
 public class HRActivity extends AppCompatActivity {
 

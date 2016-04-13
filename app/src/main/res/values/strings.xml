@@ -68,4 +68,6 @@
     <string name="db_spo2">Peripheral SpO2</string>
     <string name="title_activity_hr">Heart Rate</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="button_start">Start Service</string>
+    <string name="button_stop">Stop Service</string>
 </resources>
