@@ -1,5 +1,6 @@
 package edu.uw.tcss450.monitorui.activities;
 
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,26 +11,27 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import edu.uw.tcss450.monitorui.R;
 
 public class HRActivity extends AppCompatActivity {
-
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
@@ -50,7 +52,7 @@ public class HRActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.hr_container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
 
@@ -62,6 +64,10 @@ public class HRActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+
+
 
     }
 
@@ -92,10 +98,7 @@ public class HRActivity extends AppCompatActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
+        private LineChart mChart;
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         public PlaceholderFragment() {
@@ -117,22 +120,62 @@ public class HRActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_hr, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
-                case 1:
-                    textView.setText("This could be a graph display of heart rate.");
-                    break;
-                case 2:
-                    textView.setText("This could be a history of heart rate over time.");
-                    break;
-                case 3:
-                    textView.setText("This could be a page to set new heart rate alarm triggers.");
-                    break;
-                default:
-                    break;
+//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+//            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+//                case 1:
+//                    textView.setText("This could be a graph display of heart rate.");
+//                    break;
+//                case 2:
+//                    textView.setText("This could be a history of heart rate over time.");
+//                    break;
+//                case 3:
+//                    textView.setText("This could be a page to set new heart rate alarm triggers.");
+//                    break;
+//                default:
+//                    break;
+//            }
+
+            mChart = (LineChart) rootView.findViewById(R.id.hr_chart);
+            LineData lineData = mChart.getData();
+
+            if (lineData != null) {
+                ILineDataSet set = lineData.getDataSetByIndex(0);
+
+                if(set == null) {
+                    set = createSet();
+                    lineData.addDataSet(set);
+                }
+
+                lineData.addXValue(1 + " ");
+                lineData.addEntry(new Entry((float)(Math.random() * 40) + 20f, set.getEntryCount()), 0);
+
+                mChart.notifyDataSetChanged();
             }
+//            lineData.addEntry(new Entry(0.1f, 1), 1);
+//            lineData.addEntry(new Entry(0.3f, 2), 2);
+//            lineData.addEntry(new Entry(0.2f, 3), 3);
+//            lineData.addEntry(new Entry(0.1f, 4), 4);
+//
+//            mChart.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//            mChart.setData(lineData);
 
             return rootView;
+        }
+
+        private LineDataSet createSet() {
+            LineDataSet set = new LineDataSet(null, "Dynamic Data");
+            set.setAxisDependency(YAxis.AxisDependency.LEFT);
+            set.setColor(ColorTemplate.getHoloBlue());
+            set.setCircleColor(Color.WHITE);
+            set.setLineWidth(2f);
+            set.setCircleRadius(4f);
+            set.setFillAlpha(65);
+            set.setFillColor(ColorTemplate.getHoloBlue());
+            set.setHighLightColor(Color.rgb(244, 117, 117));
+            set.setValueTextColor(Color.WHITE);
+            set.setValueTextSize(9f);
+            set.setDrawValues(false);
+            return set;
         }
     }
 
@@ -172,4 +215,6 @@ public class HRActivity extends AppCompatActivity {
             return null;
         }
     }
+
+
 }

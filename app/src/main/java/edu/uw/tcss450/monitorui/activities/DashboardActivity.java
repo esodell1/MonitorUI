@@ -1,5 +1,7 @@
 package edu.uw.tcss450.monitorui.activities;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,18 +13,21 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import edu.uw.tcss450.monitorui.fragments.HrDbFragment;
 import edu.uw.tcss450.monitorui.R;
 import edu.uw.tcss450.monitorui.fragments.Spo2DbFragment;
 import edu.uw.tcss450.monitorui.network.NsdHelper;
+import edu.uw.tcss450.monitorui.services.MonitorSvc;
 
 public class DashboardActivity extends AppCompatActivity implements HrDbFragment.OnFragmentInteractionListener,
         Spo2DbFragment.OnFragmentInteractionListener {
-    private static final String TAG = "MonitorUI";
+    public static final String TAG = "MonitorUI";
     private NsdHelper mNsdHelper;
     private View hrdb_fragment;
     private View spo2db_fragment;
+    private MonitorSvc monitorSvc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,17 @@ public class DashboardActivity extends AppCompatActivity implements HrDbFragment
             public void onClick(View view) {
                 Snackbar.make(view, "SpO2 clicked!", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
+            }
+        });
+
+        Button start_svc = (Button) findViewById(R.id.button_start);
+        start_svc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MonitorSvc.class);
+                intent.setAction(MonitorSvc.ACTION_START_SERVICE);
+                startService(intent);
+
             }
         });
     }

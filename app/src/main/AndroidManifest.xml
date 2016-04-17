@@ -37,6 +37,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
         </activity>
+
+        <service
+            android:name=".services.MonitorSvc"
+            android:exported="false"></service>
     </application>
 
 </manifest>

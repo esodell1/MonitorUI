@@ -28,12 +28,14 @@ public class NsdHelper {
         mDiscoveryListener = new NsdManager.DiscoveryListener() {
             @Override
             public void onDiscoveryStarted(String regType) {
-                Log.d(TAG, "Service discovery started");
+                Log.d(TAG, "Service discovery started: " + regType);
             }
             @Override
             public void onServiceFound(NsdServiceInfo service) {
                 // TODO: Determine service type and name, store globally
-                Log.d(TAG, "Service discovery success: " + service.getServiceName());
+                Log.d(TAG, String.format("%s %s %s %d",
+                        service.getServiceName(), service.getServiceType(),
+                        service.getHost(), service.getPort()));
                 if (!service.getServiceType().equals(SERVICE_TYPE)) {
                     Log.d(TAG, "Unknown Service Type: " + service.getServiceType());
                 } else if (service.getServiceName().equals(mServiceName)) {
